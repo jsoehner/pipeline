@@ -348,7 +348,7 @@ func getBasicAuthSecret(ctx context.Context, params map[string]string, kubeclien
 	secretVal, ok := secret.Data[tokenSecretKey]
 	if !ok {
 		err := fmt.Errorf("cannot get API token, key %s not found in secret %s in namespace %s", tokenSecretKey, secretName, secretNS)
-		logger.Info(err)
+		logger.Infof("cannot get API token: key not found in secret %s in namespace %s", secretName, secretNS)
 		return "", err
 	}
 	return "Basic " + base64.StdEncoding.EncodeToString(

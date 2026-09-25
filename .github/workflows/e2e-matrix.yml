@@ -101,6 +101,9 @@ jobs:
         echo "${GOPATH}/bin" >> "$GITHUB_PATH"
 
     - name: Run tests
+      env:
+        K8S_VERSION: ${{ matrix.k8s-version }}
+        FEATURE_FLAGS: ${{ matrix.feature-flags }}
       run: |
         # This is a hack to make sure binary in /bin from the base image are not picked by default
         # On ubuntu-arm, there is a /bin/go that shadows the one setup-go installs
@@ -110,9 +113,9 @@ jobs:
           --registry-url $(echo ${KO_DOCKER_REPO} | cut -d'/' -f 1) \
           --cluster-suffix c${{ github.run_id }}.local \
           --nodes 3 \
-          --k8s-version ${{ matrix.k8s-version }} \
+          --k8s-version "$K8S_VERSION" \
           --e2e-script ./test/e2e-tests.sh \
-          --e2e-env ./test/e2e-tests-kind-${{ matrix.feature-flags }}.env
+          --e2e-env "./test/e2e-tests-kind-${FEATURE_FLAGS}.env"
 
     - name: Upload test results
       uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
