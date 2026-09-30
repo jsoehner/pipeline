@@ -59,7 +59,7 @@ jobs:
           k8s-version: ${{ env.KUBERNETES_VERSION }}
 
       - name: Set up Tekton
-        uses: tektoncd/actions/setup-tektoncd@dd92514472167b361de1c95fd31fc2ef83c282ec  # main
+        uses: tektoncd/actions/setup-tektoncd@cd4768a594ec4a7af8ef72d73524a584cb564e34  # main
         with:
           pipeline_version: latest
           setup_registry: "true"

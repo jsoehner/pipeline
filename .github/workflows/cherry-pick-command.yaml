@@ -20,13 +20,15 @@ on:
     types: [cherry-pick-command]
 
 permissions:
-  contents: write
-  pull-requests: write
-  issues: write
+  contents: read
 
 jobs:
   cherry-pick:
     name: Cherry Pick Actions
-    uses: tektoncd/plumbing/.github/workflows/_cherry-pick-command.yaml@9f8e1781d5cc431e5c95190a9fc14dfba1cec391  # main
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+    uses: tektoncd/plumbing/.github/workflows/_cherry-pick-command.yaml@db388d6cbbf4b744f6be38dd05ab219b7608f80e  # main
     secrets:
       CHATOPS_TOKEN: ${{ secrets.CHATOPS_TOKEN }}

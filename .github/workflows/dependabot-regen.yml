@@ -7,8 +7,7 @@ on:
   workflow_dispatch: # Allow manual triggering
 
 permissions:
-  contents: write
-  pull-requests: write
+  contents: read
 
 jobs:
   regenerate:

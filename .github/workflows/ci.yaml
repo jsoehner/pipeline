@@ -99,7 +99,6 @@ jobs:
     runs-on: ubuntu-latest-8-cores
     permissions:
       contents: read
-      checks: write # Used by golangci-lint to annotate code in the PR
     needs: [changes]
     steps:
     - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
@@ -192,7 +191,7 @@ jobs:
           KO_DOCKER_REPO=example.com ko resolve --platform=all --push=false -f config/resolvers 1>/dev/null
   e2e-tests:
     needs: [build]
-    uses: ./.github/workflows/e2e-matrix.yml
+    uses: $/.github/workflows/e2e-matrix.yml
     with:
       is-draft: ${{ github.event.pull_request.draft }}
 
