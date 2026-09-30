@@ -18,12 +18,15 @@ on:
     types: [rebase-command]
 
 permissions:
-  contents: write
-  pull-requests: write
+  contents: read
 
 jobs:
   rebase:
     name: Rebase PR
-    uses: tektoncd/plumbing/.github/workflows/_rebase-command.yaml@4e60dd3785868521b0542134f5f57f2989c8883d  # main
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+    uses: tektoncd/plumbing/.github/workflows/_rebase-command.yaml@db388d6cbbf4b744f6be38dd05ab219b7608f80e  # main
     secrets:
       CHATOPS_TOKEN: ${{ secrets.CHATOPS_TOKEN }}
